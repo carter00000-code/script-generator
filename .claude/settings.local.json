@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(mkdir -p \"C:\\\\Users\\\\liyuyeh\\\\Pictures\\\\liy\\\\Script Genenator\\\\frontend\\\\.claude\")",
+      "mcp__Claude_Preview__preview_start",
+      "PowerShell($key = \\(Get-Content \"C:\\\\Users\\\\liyuyeh\\\\Pictures\\\\liy\\\\Script Genenator\\\\backend\\\\.env\" | Where-Object { $_ -match \"ANTHROPIC_API_KEY\" }\\) -replace \"ANTHROPIC_API_KEY=\", \"\"; $body = '{\"model\":\"claude-haiku-4-5-20251001\",\"max_tokens\":10,\"messages\":[{\"role\":\"user\",\"content\":\"hi\"}]}'; $response = Invoke-WebRequest -Uri \"https://api.anthropic.com/v1/messages\" -Method POST -Headers @{\"x-api-key\"=$key;\"anthropic-version\"=\"2023-06-01\";\"content-type\"=\"application/json\"} -Body $body -UseBasicParsing; $response.StatusCode)"
+    ]
+  }
+}
