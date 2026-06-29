@@ -212,7 +212,10 @@ export default function App() {
       catch { const m = clean.match(/\[[\s\S]*\]/); if (m) try { items = JSON.parse(m[0]); } catch {} }
       if (items.length === 0) throw new Error("無法解析搜尋結果，請換個關鍵字試試");
 
-      setSearchResults(items);
+      // 嚴格過濾：只保留符合時間範圍的新聞，無日期的保留
+      const maxHours = tf?.hours || 9999;
+      const filtered = items.filter(i => !i.date || hoursAgo(i.date) <= maxHours);
+      setSearchResults(filtered.length > 0 ? filtered : items);
       setStep("select");
     } catch (e) {
       setSearchError(e.message || "搜尋失敗，請稍後再試");
