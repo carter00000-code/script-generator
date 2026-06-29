@@ -6,8 +6,11 @@ const TAVILY_API_URL = "https://api.tavily.com/search";
 
 // POST /api/search — 用 Tavily 搜尋真實新聞
 router.post("/search", async (req, res) => {
-  const { query } = req.body;
+  const { query, hours } = req.body;
   if (!query) return res.status(400).json({ error: "query is required" });
+
+  // Tavily 的 days 參數：最少 1 天
+  const days = Math.max(1, Math.ceil((hours || 24) / 24));
 
   try {
     const response = await fetch(TAVILY_API_URL, {
@@ -19,6 +22,7 @@ router.post("/search", async (req, res) => {
         search_depth: "advanced",
         max_results: 12,
         include_published_date: true,
+        days,
       }),
     });
     const data = await response.json();

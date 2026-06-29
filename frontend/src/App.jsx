@@ -193,7 +193,7 @@ export default function App() {
       const searchRes = await fetch(`${API_BASE}/search`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query }),
+        body: JSON.stringify({ query, hours: tf?.hours || 24 }),
       });
       if (!searchRes.ok) throw new Error("搜尋失敗，請稍後再試");
       const searchData = await searchRes.json();
